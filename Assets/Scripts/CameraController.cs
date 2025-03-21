@@ -12,15 +12,14 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) index = 0;
-        else if (Input.GetKeyDown(KeyCode.Alpha2)) index = 1;
+        if (Input.GetKeyDown(KeyCode.Alpha1)) index = 0; // Pov1
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) index = 1; // Pov2
         //else if (Input.GetKeyDown(KeyCode.Alpha3)) index = 2;
-        //else if (Input.GetKeyDown(KeyCode.Alpha4)) index = 3;
         
         // Set our target to the relevant POV.
         target = povs[index].position;
         
-    } // Update
+    } // Update Camera Pov
 
     private void FixedUpdate()
     {

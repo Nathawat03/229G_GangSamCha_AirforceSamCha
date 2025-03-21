@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using TMPro;
 
 public class PlaneController : MonoBehaviour
 {
@@ -25,11 +26,12 @@ public class PlaneController : MonoBehaviour
     }
     
     Rigidbody rb;
+    [SerializeField] TextMeshProUGUI hud; //Text
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-    }
+    } // Awake
 
     private void HeadleInpact()
     {
@@ -48,7 +50,8 @@ public class PlaneController : MonoBehaviour
     private void Update()
     {
         HeadleInpact();
-    }
+        updatehudText();
+    } // Update
 
     private void FixedUpdate()
     {
@@ -57,5 +60,13 @@ public class PlaneController : MonoBehaviour
         rb.AddTorque(transform.up * yaw * responseModifier);
         rb.AddTorque(transform.right * pitch * responseModifier);
         rb.AddTorque(transform.forward * roll * responseModifier);
-    }
+    } // FixedUpdate
+
+    private void updatehudText()
+    {
+        hud.text = $"Throttle: " + throttle.ToString("F0") + "%\n";
+        hud.text += $"Airspeed: " + (rb.velocity.magnitude * 3.6f).ToString("F0") + "Km/h\n";
+        hud.text += $"Altitude: " + transform.position.y.ToString("F0") + " M";
+        
+    } // UpdatehudText
 }
