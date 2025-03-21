@@ -11,6 +11,8 @@ public class PlaneController : MonoBehaviour
     public float maxthrottle = 200f;
     [Tooltip("How responsive the plane is when rolling, pitching, and yawing.")]
     public float responsiveness = 10f;
+    [Tooltip("How much lift force this plane generates as is gains speed.")]
+    public float lift = 135f;
     
     private float throttle; // Percentage of maxinum engine thrust currently being used.
     private float roll;     // Tilting left to right.
@@ -26,11 +28,13 @@ public class PlaneController : MonoBehaviour
     }
     
     Rigidbody rb;
+    AudioSource engineSound;
     [SerializeField] TextMeshProUGUI hud; //Text
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        engineSound = GetComponent<AudioSource>();
     } // Awake
 
     private void HeadleInpact()
@@ -51,6 +55,8 @@ public class PlaneController : MonoBehaviour
     {
         HeadleInpact();
         updatehudText();
+        engineSound.volume = throttle * 0.01f;
+        
     } // Update
 
     private void FixedUpdate()
@@ -60,6 +66,8 @@ public class PlaneController : MonoBehaviour
         rb.AddTorque(transform.up * yaw * responseModifier);
         rb.AddTorque(transform.right * pitch * responseModifier);
         rb.AddTorque(transform.forward * roll * responseModifier);
+        rb.AddForce(Vector3.up * rb.velocity.magnitude * lift);
+        
     } // FixedUpdate
 
     private void updatehudText()
