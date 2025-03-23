@@ -7,7 +7,9 @@ public class Shooter : MonoBehaviour
  
     void Update()
     {
+        
         Shooting();
+        
     }// Update
  
     void Shooting()
@@ -32,9 +34,11 @@ public class Shooter : MonoBehaviour
  
                     if ( enemy != null )
                     {
-                        enemy.TakeDamage( 1 );
+                        enemy.TakeDamage( 5 );
                     }
-                }
+                    
+                }// Enemy
+                
             }// KeyCode.Space
             
         } // Physics.Raycast

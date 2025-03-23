@@ -21,5 +21,4 @@ public class Enemy : MonoBehaviour
         }
  
     }//TakeDamage
-    
 }
