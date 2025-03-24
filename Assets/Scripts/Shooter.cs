@@ -14,13 +14,14 @@ public class Shooter : MonoBehaviour
  
     void Shooting()
     {
-        Debug.DrawRay( firePoint.position , transform.forward * 60f , Color.green );
+        Debug.DrawRay( firePoint.position , transform.forward * 300f , Color.green );
+        
         
         RaycastHit hit;
  
-        if ( Physics.Raycast ( firePoint.position , transform.forward , out hit , 60f ) )
+        if ( Physics.Raycast ( firePoint.position , transform.forward , out hit , 300f ) )
         {
-            Debug.DrawRay(firePoint.position, transform.forward * 60f, Color.red);
+            Debug.DrawRay(firePoint.position, transform.forward * 300f, Color.red);
             print( hit.collider.name );
             
             if ( Input.GetKeyDown( KeyCode.Space ) )

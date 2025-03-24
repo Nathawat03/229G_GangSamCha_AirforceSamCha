@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class PlaneController : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class PlaneController : MonoBehaviour
     private float roll;     // Tilting left to right.
     private float pitch;    // Tilting front to back.
     private float yaw;      // "Turning" left to right.
-
+    
     private float responseModifier // Value used to tweak responsiveness to suit plane's mass.
     {
         get
@@ -77,4 +78,7 @@ public class PlaneController : MonoBehaviour
         hud.text += $"Altitude: " + transform.position.y.ToString("F0") + " M";
         
     } // UpdatehudText
+    
+    
+    
 }
