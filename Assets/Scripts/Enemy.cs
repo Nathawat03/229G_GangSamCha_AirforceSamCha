@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
     public int health = 10;
     public GameObject healthBar;
+    
  
     void Update()
     {
@@ -18,6 +20,8 @@ public class Enemy : MonoBehaviour
         if ( health <= 0 )
         {
             Destroy( this.gameObject );
+            print("Enemy Destroyed");
+            
         }
  
     }//TakeDamage

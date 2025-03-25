@@ -31,6 +31,8 @@ public class PlaneController : MonoBehaviour
     Rigidbody rb;
     AudioSource engineSound;
     [SerializeField] TextMeshProUGUI hud; //Text
+    
+    
 
     private void Awake()
     {
@@ -78,7 +80,7 @@ public class PlaneController : MonoBehaviour
         hud.text += $"Altitude: " + transform.position.y.ToString("F0") + " M";
         
     } // UpdatehudText
-    
-    
+
+   
     
 }
