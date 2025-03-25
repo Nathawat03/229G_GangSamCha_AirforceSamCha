@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UIElements;
+using UnityEngine.Events;
 
 public class PlaneController : MonoBehaviour
 {
@@ -32,8 +33,9 @@ public class PlaneController : MonoBehaviour
     AudioSource engineSound;
     [SerializeField] TextMeshProUGUI hud; //Text
     
+    public int NumberOfPoints { get; private set; } // Point
+    public UnityEvent<PlaneController> OnPointsCollected;
     
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -73,14 +75,22 @@ public class PlaneController : MonoBehaviour
         
     } // FixedUpdate
 
+    public void PointCollected()
+    {
+        
+        NumberOfPoints++;
+        OnPointsCollected.Invoke(this);
+        
+    } // Point ++
+
     private void updatehudText()
     {
-        hud.text = $"Throttle: " + throttle.ToString("F0") + "%\n";
+        hud.text  = $"Throttle: " + throttle.ToString("F0") + "%\n";
         hud.text += $"Airspeed: " + (rb.velocity.magnitude * 3.6f).ToString("F0") + "Km/h\n";
         hud.text += $"Altitude: " + transform.position.y.ToString("F0") + " M";
+        hud.text += $"Points: 10 /  "  + NumberOfPoints.ToString("F0") ; // + "\n"
         
     } // UpdatehudText
 
-   
     
 }
