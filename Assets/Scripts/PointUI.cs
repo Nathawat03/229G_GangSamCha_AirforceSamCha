@@ -10,8 +10,8 @@ public class PointUI : MonoBehaviour
         pointText = GetComponent<TextMeshProUGUI>();
     }
 
-    public void Update (PlaneController planeController)
-    {
-        pointText.text = planeController.NumberOfPoints.ToString();
-    }
+    //public void Update (PlaneController planeController)
+    //{
+       // pointText.text = planeController.NumberOfPoints.ToString();
+    //}
 }
