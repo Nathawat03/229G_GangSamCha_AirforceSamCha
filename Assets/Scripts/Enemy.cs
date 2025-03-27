@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         {
             Destroy( this.gameObject );
             print("Enemy Destroyed");
-            
+            Time.timeScale = 0;
         }
  
     }//TakeDamage
