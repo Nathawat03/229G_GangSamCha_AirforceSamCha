@@ -7,4 +7,10 @@ public class EndGame : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }//Play
     
+    public void quit()
+    {
+        Application.Quit();
+        Debug.Log("Player Has Quit The Game");
+    } // Quit
+    
 }
