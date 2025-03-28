@@ -36,10 +36,20 @@ public class PlaneController : MonoBehaviour
     public int NumberOfPoints { get; private set; } // Point
     public UnityEvent<PlaneController> OnPointsCollected;
     
+    // Physic
+    private float accerelation;
+    private float mass;
+    private float force;
+
+    
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        mass = GetComponent<Rigidbody>().mass;
+        accerelation = this.rb.velocity.magnitude;
         engineSound = GetComponent<AudioSource>();
+        
     } // Awake
 
     private void HeadleInpact()
@@ -61,17 +71,20 @@ public class PlaneController : MonoBehaviour
         HeadleInpact();
         updatehudText();
         engineSound.volume = throttle * 0.01f;
+        force = throttle * responseModifier;
+        NewtonForce();
         
     } // Update
 
     private void FixedUpdate()
     {
         // Apply forces to our plane.
-        rb.AddForce(transform.forward * maxthrottle * throttle);
-        rb.AddTorque(transform.up * yaw * responseModifier);
-        rb.AddTorque(transform.right * pitch * responseModifier);
-        rb.AddTorque(transform.forward * roll * responseModifier);
+        rb.AddForce(transform.forward * maxthrottle * throttle); // Percentage of maxinum engine thrust currently being used.
+        rb.AddTorque(transform.up * yaw * responseModifier); // "Turning" left to right.
+        rb.AddTorque(transform.right * pitch * responseModifier); // Tilting front to back.
+        rb.AddTorque(transform.forward * roll * responseModifier); // Tilting left to right.
         rb.AddForce(Vector3.up * rb.velocity.magnitude * lift);
+        
         
     } // FixedUpdate
 
@@ -82,6 +95,13 @@ public class PlaneController : MonoBehaviour
         OnPointsCollected.Invoke(this);
         
     } // Point ++
+
+    void NewtonForce()
+    {
+        force = mass * accerelation; // F = MA
+        force = Mathf.Clamp(force, 0f, maxthrottle);
+    }
+    
 
     private void updatehudText()
     {
