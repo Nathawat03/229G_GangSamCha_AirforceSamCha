@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class Enemy : MonoBehaviour
 {
     public int health = 10;
     public GameObject healthBar;
-    
+   
  
     void Update()
     {
@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
             Destroy( this.gameObject );
             print("Enemy Destroyed");
             Time.timeScale = 0;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            
         }
  
     }//TakeDamage
